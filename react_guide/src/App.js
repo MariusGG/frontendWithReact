@@ -42,7 +42,7 @@ class App extends Component {
       width: "10%",
       cursor: "pointer"
     }
-    
+
     let characters = null;
     if (this.state.showCharaters) {
       characters = (
@@ -87,3 +87,8 @@ export default App;
 //in the "toggleCharacters" function we store the original state in a variable
 // and say setState of "showCharaters" is not what "isDisplayed" (which is false, so it becomes true now)
 // is not is represented with the "!" so if "isDisplayed" is false the "showCharaters" becomes True... Vice Versa
+
+// now we have shorten the code being returned by using a more dynamic javascript way
+// by passing the characters as an empty variable then using tradition JS if statment to return the toggleCharacters
+// then just passing the persons variable in the returned JSX
+// bet way to out put content dynamically and recommended as best practice

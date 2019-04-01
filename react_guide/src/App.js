@@ -42,25 +42,29 @@ class App extends Component {
       width: "10%",
       cursor: "pointer"
     }
+    
+    let characters = null;
+    if (this.state.showCharaters) {
+      characters = (
+        <div>
+        <Person name={ this.state.characters[0].name }
+          occupation={this.state.characters[0].occupation}
+          changePerson2={this.handleOccupationChange.bind(this,"Marius")}/>
+
+        <Person name={ this.state.characters[1].name }
+          occupation={this.state.characters[1].occupation}
+          newName={this.handleChangeInput}/>
+
+        <Person name={ this.state.characters[2].name }
+          occupation={this.state.characters[2].occupation}/>
+      </div>
+    );
+    }
+
     return (
       <div className="App">
         <h1>Welcome to my React App! </h1>
-        {
-          this.state.showCharaters ?
-            <div>
-            <Person name={ this.state.characters[0].name }
-              occupation={this.state.characters[0].occupation}
-              changePerson2={this.handleOccupationChange.bind(this,"Marius")}/>
-
-            <Person name={ this.state.characters[1].name }
-              occupation={this.state.characters[1].occupation}
-              newName={this.handleChangeInput}/>
-
-            <Person name={ this.state.characters[2].name }
-              occupation={this.state.characters[2].occupation}/>
-          </div> : null
-      }
-
+        { characters }
         <button
           style={btnStyle}
           onClick={this.toggleCharacters}>Click Me!</button>

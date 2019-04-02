@@ -81,3 +81,34 @@ render(){
 // this is simalr to the above but using Javascript outside the return statement
 // As JSx doesn't allow to write pure javascript
 //
+
+
+/*--------------------------------------------------*/
+//            OUTPUTTING LIST  ".MAP()"             //
+/*--------------------------------------------------*/
+let characters = null;
+if(this.state.characters) {
+  characters = (
+    <div>
+      {this.state.characters.map(character => {
+        return <Person name={character.name} occupation={character.occupation} />
+      } )}
+    </div>
+  )
+}
+//  as this is written within the render and not the return we can write pure JAvascript here
+// we use "{ }" to render something within the JSX code
+// we render the state of the characters, which is an array of javascript objects
+// As its still plain JS, JSX would not understand it, so we need to return some JSX
+
+// To convert Arrays we can use the ".map()" function which will map every element within a given array into something else
+// it does this by exercuting a method on every element within a given array (for this its "characters")
+// the method is paased to the .map() function within the parenthesis
+// this method will be exercuted on every element within the characters array (hence we call it singular)
+// the .map() function will return a new array mapping each individual object in characters
+// As the return keyword is print the ouput of the new array and its within JSX,
+// React will try to render the new ouput to the DOM, Only if its valid JSX
+// so every element within the array gets mapped into JSX,
+// So it gets mapped into a "Person  Component" in the end
+// So we can asign "name" & "Occupation" props to the Person componenet,
+// now we can map the individual elements and access name and occupation with "name={character.name} & occupation={character.occupation}"

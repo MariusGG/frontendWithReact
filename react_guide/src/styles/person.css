@@ -2,8 +2,10 @@
   box-shadow: 5px 5px 5px   #9c9c9c;
   padding: 20px;
   border: 2px solid #838383;
-  margin: 30px auto;
+  margin: 60px auto;
   background-color: #ffe293;
   width: 50%;
   text-align: center;
+  border-radius: 20px;
+  cursor: pointer;
 }

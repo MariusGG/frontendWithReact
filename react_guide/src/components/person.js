@@ -4,8 +4,8 @@ import '../styles/person.css'
 const Person = (props) => {
   return (
     <div className="person">
-      <h1>Hi! My name is {props.name}</h1>
-      <h2 onClick={props.changePerson2}>Occupation: {props.occupation}</h2>
+      <h1 onClick={props.clicked}>Hi! My name is {props.name}</h1>
+      <h2 >Occupation: {props.occupation}</h2>
       <input type="text" onChange={props.newName} value={props.name}/>
     </div>
   )

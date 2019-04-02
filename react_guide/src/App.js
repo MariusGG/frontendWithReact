@@ -5,33 +5,44 @@ import Person from './components/person'
 class App extends Component {
   state = {
     characters: [
-      { name: "Homer", occupation: "Nuclear Engineer" },
-      { name: "Peter", occupation: "Safety inspector" },
-      { name: "Fred", occupation: "Crane operator" }
+      { id: 1, name: "Homer", occupation: "Nuclear Engineer" },
+      { id: 2, name: "Peter", occupation: "Safety inspector" },
+      { id: 3, name: "Fred", occupation: "Crane operator" }
     ],
     showCharaters: false
   }
-  handleOccupationChange = (newCharacter) => {
-    this.setState({
-      characters: [
-        { name: newCharacter, occupation: "Crane operator" },
-        { name: "Peter", occupation: "Nuclear Engineer" },
-        { name: "Fred", occupation: "Safety inspector" }
-      ]
-    })
+
+  handleChangeInput = (event, id ) => {
+    const characterIndex = this.state.characters.findIndex(person => { // ".findindex()" will be just like map it will exercute a function on every element in an array
+      return person.id === id;  //unlike .map() we return true or false   // here we have a function called person
+    }); // we are saying if person (every iteration of objects in the array) if its equal to the id we recive for this function...and if so...Return TRUE
+    // if true the "characterIndex" will hold the index of that character
+
+    //SO now I can get the person by using the above ID
+    const character = { ...this.state.characters[characterIndex] }; // using the spread operator to avoid mutating the original state
+    // Creating a copy with the spread operator (more modern way ES6)
+    // alternative is by doing ( const characters = Object.assign({}, this.characters[characterIndex]) ) older version
+
+    //now to update the persons name
+    character.name = event.target.value;
+
+    //now to update the array from the above position "characterIndex"
+    const characters = [...this.state.characters]; // getting the whole array of characters to edit the copy and not the original reference
+    characters[characterIndex] = character; // now i can update by one position depending on the character index
+
+    this.setState({ characters: characters }); // now its and updated array, which was a copy of the old array and with an updated the name of one character
   }
-  handleChangeInput = (event) => {
-    this.setState({
-      characters: [
-        { name: "Homer", occupation: "Nuclear Engineer" },
-        { name: event.target.value, occupation: "Safety inspector" },
-        { name: "Fred", occupation: "Crane operator" }
-      ]
-    })
-  }
+
  toggleCharacters = () => {
     const isDisplayed = this.state.showCharaters;
     this.setState({showCharaters: !isDisplayed});
+  }
+
+  deleteCharacterHandler = (characterIndex) => {
+    const characters = [...this.state.characters] // using spread so we are not refrencing to the original but its a copy
+    characters.splice(characterIndex, 1);         // best practice is to use the spread operator
+    this.setState({ characters: characters}) // always update state in an immuteable way... meaning without mutating the original state first
+                                            // create a copy of the original, and change that and then update that with "setState"
   }
 
   render() {
@@ -47,19 +58,17 @@ class App extends Component {
     if (this.state.showCharaters) {
       characters = (
         <div>
-        <Person name={ this.state.characters[0].name }
-          occupation={this.state.characters[0].occupation}
-          changePerson2={this.handleOccupationChange.bind(this,"Marius")}/>
-
-        <Person name={ this.state.characters[1].name }
-          occupation={this.state.characters[1].occupation}
-          newName={this.handleChangeInput}/>
-
-        <Person name={ this.state.characters[2].name }
-          occupation={this.state.characters[2].occupation}/>
-      </div>
-    );
-    }
+          { this.state.characters.map((character, arrayIndex) => {  // getting the array index so we can call this.deleteCharacterHandler
+            return <Person
+              name={character.name}
+              occupation={character.occupation}
+              clicked={this.deleteCharacterHandler.bind(this, arrayIndex)}
+              key={character.id}
+              newName={(event) => this.handleChangeInput(event, character.id)} /> // using the .bind method instead of an arrow function
+            })}
+        </div>
+        );
+      }
 
     return (
       <div className="App">
@@ -92,3 +101,9 @@ export default App;
 // by passing the characters as an empty variable then using tradition JS if statment to return the toggleCharacters
 // then just passing the persons variable in the returned JSX
 // bet way to out put content dynamically and recommended as best practice
+
+// key is to give a unique identifier to React so it know each person component is different
+// if this was data coming from an API you would have a unique ID
+// its import to have a "key" when rendering a list of data and React will throw an error in the console
+// react expects to this as a default as all data have a unique id to indentify themselves
+// all elements rendering data must have a "key={}" property, helps react update the list effiecently

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+#event-listeners {
+  width: 100px;
+  height: 100px;
+  background: yellow;
+  -webkit-transition: 2s; /* For Safari 3.1 to 6.0 */
+  transition: 2s;
+}
+
+#event-listeners:hover {
+  height: -400px;
+}
+</style>
+  </head>
+  <body onclick="myFunction(event)">
+    <header>
+      <h1 id="welcome">Welcome to my page!</h1>
+
+    </header>
+    <p id="hits"></p>
+    <main id="main-ccontainer">
+      <h2 id="clickME"></h2>
+      <button type="button" onclick="changeMe()" name="button">changeME</button>
+    </main>
+    <section id="new-section">
+
+    </section>
+    <aside></aside>
+
+    <h1 class="newName" onclick="changeName()">MARIUS</h1>
+    <h1 id="newEllie">ELLIE</h1>
+    <h2 class="new-h2"></h2>
+    <h4></h4>
+    <input id="newInput" type="search" name="" value="">
+    <p id="input-output"></p>
+    <p id="demo2"></p>
+    <button type="button" onclick="getValue()" name="button">GET VALUE</button>
+    <h5 id="newH5"></h5>
+    <div id="event-listeners"></div>
+    <section id="newSection2">
+
+      <input id="section2Id" type="text" name="" value="">
+      <h2 id="show-me"></h2>
+      <button type="button" onclick="pushData()" name="button">PushDATA</button>
+    </section>
+    <aside class="blocking">
+
+    </aside>
+    <script type="text/javascript" src="domScript.js"></script>
+  </body>
+</html>

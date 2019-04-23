@@ -30,8 +30,12 @@ function addingUrl(tag, url) {
   return tag.href = url;
 }
 let getSponsor = findTag('article h2')
-console.log(getSponsor);
 let sponsorP = findTag('#sponsors p')
+
+getSponsor.addEventListener('click', function(e) {
+  return sponsorP.style.display = "block";
+});
+
 
 console.log(sponsorP);
 
